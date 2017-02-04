@@ -64,12 +64,20 @@ for name in clean_movie_names:
 	if len(imdb_search)>0:
 		imdb_movie_id =  (imdb_search)[0].get('imdb_id')
 		movie = imdb.get_title_by_id(imdb_movie_id)
-		#print str(movie.title) +"\t" + str(movie.rating)
-		writer.writerow( ( movie.title, movie.rating, movie.votes, (",".join(movie.genres)), movie.release_date, movie.cast_summary, movie.directors_summary, movie.writers_summary, movie.plot_outline ) )
+		cast_summary = []
+		for person in movie.cast_summary:
+			cast_summary.append(person.name)
+		directors_summary = []
+		for person in movie.directors_summary:
+			directors_summary.append(person.name)
+		writers_summary = []
+		for person in movie.writers_summary:
+			writers_summary.append(person.name)
+		writer.writerow( ( movie.title, movie.rating, movie.votes, (",".join(movie.genres)), movie.release_date, (",".join(cast_summary)), (",".join(directors_summary)), (",".join(writers_summary)), movie.plot_outline ) )
 	i = i+1	
 	bar.update(i)
 
 f.close()
 bar.finish()
 
-print "We have consolidated the data.\n Go ahead and check list.csv"
+print "We have consolidated the data.\nGo ahead and check list.csv"
