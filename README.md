@@ -1,8 +1,9 @@
 # my-IMDB-collection
 Python Script to create IMDB database (.csv) for user's local movie collection
 
-Create your local movie collection database without using any 3rd party IMDB API.
-This script fetches the data directly from IMDB.
+Create your local movies database without using any 3rd party IMDB API, this script fetches the data directly from IMDB.
+
+The CSV(.csv) file can be used to sort the movies on the basis of IMDB ratings, votes, release year or filter on the basis of genres, cast, producer. CSV file can be opened in LibreOffice or MSFT Excel for better readibility.
 
 ## Features
 
