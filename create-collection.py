@@ -2,6 +2,7 @@
 
 import os
 import csv
+import progressbar
 from guessit import guessit
 from imdbpie import Imdb
 
@@ -36,6 +37,13 @@ for name in raw_movie_names:
 clean_movie_names = list(set(clean_movie_names))
 
 
+#Use Progressbar to tell user about the progress
+
+bar = progressbar.ProgressBar(maxval=len(clean_movie_names), widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+
+bar.start()
+i = 0
+
 #Get IMDB ratings for each movie
 
 imdb = Imdb(anonymize=True)
@@ -51,3 +59,8 @@ for name in clean_movie_names:
 		movie = imdb.get_title_by_id(imdb_movie_id)
 		#print str(movie.title) +"\t" + str(movie.rating)
 		writer.writerow((movie.title, movie.rating, movie.votes, movie.genres, movie.release_date, movie.cast_summary, movie.directors_summary, movie.writers_summary, movie.plot_outline) )
+	i = i+1	
+	bar.update(i)
+
+f.close()
+bar.finish()
