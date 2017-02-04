@@ -14,6 +14,8 @@ if os.path.isfile("list.csv"):
 
 raw_movie_names = []
 
+print "Reading your local directory for movies\n"
+
 immediate_directories = [name for name in os.listdir(".") if os.path.isdir(name)]
 
 raw_movie_names.extend(immediate_directories)
@@ -36,6 +38,11 @@ for name in raw_movie_names:
 
 clean_movie_names = list(set(clean_movie_names))
 
+print "Found : " + str(len(clean_movie_names)) + " movies in your collection\n"
+
+print "Please wait...we are fetching limited data from IMDB\n"
+
+print "Sit back and relax...we are working on your collection\n"
 
 #Use Progressbar to tell user about the progress
 
@@ -58,9 +65,11 @@ for name in clean_movie_names:
 		imdb_movie_id =  (imdb_search)[0].get('imdb_id')
 		movie = imdb.get_title_by_id(imdb_movie_id)
 		#print str(movie.title) +"\t" + str(movie.rating)
-		writer.writerow((movie.title, movie.rating, movie.votes, movie.genres, movie.release_date, movie.cast_summary, movie.directors_summary, movie.writers_summary, movie.plot_outline) )
+		writer.writerow( ( movie.title, movie.rating, movie.votes, (",".join(movie.genres)), movie.release_date, movie.cast_summary, movie.directors_summary, movie.writers_summary, movie.plot_outline ) )
 	i = i+1	
 	bar.update(i)
 
 f.close()
 bar.finish()
+
+print "We have consolidated the data.\n Go ahead and check list.csv"
