@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os
+from guessit import guessit
 
 #Read all movie names in current directory and their immediate directories (upto one level down)
 raw_movie_names = []
@@ -13,6 +14,5 @@ for each_directory in immediate_directories:
 raw_movie_names = list(set(raw_movie_names))
 
 for name in raw_movie_names:
-	print name
-
+	print (guessit(name)).get('title')
 
